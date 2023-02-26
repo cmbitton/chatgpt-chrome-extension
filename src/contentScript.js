@@ -44,6 +44,7 @@ function createChatGPTGeneralInterface () {
 
   //message body selection
   const fieldset = document.createElement("fieldset");
+  fieldset.classList.add("chatgpt-text-input-fieldset", "hidden");
   const legend = document.createElement("legend");
   legend.textContent = "Select ChatGPT Input Text: "
   const selectedTextContainer = document.createElement("div");
@@ -81,6 +82,7 @@ function runGeneralChatGPT(){
   const clearButton = document.querySelector(".chatgpt-general-clear-button")
   const chatGPTInput = document.querySelector(".gpt-general-prompt-input");
   const output = document.querySelector(".chatgpt-general-output");
+  const fieldset = document.querySelector(".chatgpt-text-input-fieldset");
   runButton.addEventListener("click", () => {
     const selectedTextRadio = document.querySelector("#selected-text-radio").checked
     const highlightedText = window.getSelection().toString();
@@ -108,6 +110,7 @@ function runGeneralChatGPT(){
     runButton.classList.toggle("hidden");
     chatGPTInput.classList.toggle("hidden");
     output.classList.toggle("hidden");
+    fieldset.classList.toggle("hidden")
   })
 }
 createChatGPTGeneralInterface();

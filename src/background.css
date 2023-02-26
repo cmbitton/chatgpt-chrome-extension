@@ -72,8 +72,9 @@
 }
 
 .chatgpt-general-output {
+    overflow: auto;
     width: 350px;
-    height: 100%;
+    height: 350px;
     background-color: #eeeeee85;
     border-radius: 5px;
     padding: 10px;
