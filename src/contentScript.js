@@ -24,10 +24,12 @@ function createChatGPTGeneralInterface () {
   //prompt input
   const promptInput = document.createElement("input");
   promptInput.type = "text";
+  promptInput.placeholder = "ChatGPT Prompt Input"
   promptInput.classList.add("gpt-general-prompt-input", "hidden")
 
   //output
   const output = document.createElement("output");
+  output.textContent = "Output"
   output.classList.add("chatgpt-general-output", "hidden");
 
   //run button
@@ -40,9 +42,38 @@ function createChatGPTGeneralInterface () {
   clearButton.classList.add("chatgpt-general-clear-button", "hidden");
   clearButton.textContent = "CLEAR";
 
-  container.append(promptInput, gptLogo, output, runButton, clearButton)
+  //message body selection
+  const fieldset = document.createElement("fieldset");
+  const legend = document.createElement("legend");
+  legend.textContent = "Select ChatGPT Input Text: "
+  const selectedTextContainer = document.createElement("div");
+  const selectedTextRadio = document.createElement("input");
+  selectedTextRadio.id = "selected-text-radio";
+  selectedTextRadio.name = "chatgpt-input-text"
+  selectedTextRadio.type = "radio";
+  selectedTextRadio.value = "selected-text";
+  selectedTextRadio.setAttribute("checked", true)
+  const selectedTextLabel = document.createElement("label");
+  selectedTextLabel.textContent = "Highlighted/Selected Text";
+  selectedTextLabel.setAttribute("for", "selected-text-radio");
+  selectedTextContainer.append(selectedTextRadio, selectedTextLabel);
+
+  const outputContainer = document.createElement("div");
+  const outputTextRadio = document.createElement("input");
+  outputTextRadio.id = "output-text-radio";
+  outputTextRadio.name = "chatgpt-input-text"
+  outputTextRadio.type = "radio";
+  outputTextRadio.value = "output-text";
+  const outputTextLabel = document.createElement("label");
+  outputTextLabel.textContent = "GPT Output Text";
+  outputTextLabel.setAttribute("for", "output-text-radio");
+  outputContainer.append(outputTextRadio, outputTextLabel);
+
+  fieldset.append(legend, selectedTextContainer, outputContainer)
+
+
+  container.append(promptInput, gptLogo, output, runButton, clearButton, fieldset)
   body.insertBefore(container, body.firstChild)
-  //input
 }
 function runGeneralChatGPT(){
   const runButton = document.querySelector(".chatgpt-general-run-button");
@@ -51,13 +82,14 @@ function runGeneralChatGPT(){
   const chatGPTInput = document.querySelector(".gpt-general-prompt-input");
   const output = document.querySelector(".chatgpt-general-output");
   runButton.addEventListener("click", () => {
+    const selectedTextRadio = document.querySelector("#selected-text-radio").checked
     const highlightedText = window.getSelection().toString();
     chrome.runtime.sendMessage(
       {
         type: 'CHATGPT',
         payload: {
           prompt: chatGPTInput.value, 
-          message: highlightedText
+          message: `${(selectedTextRadio) ? highlightedText : output.innerHTML}`
         },
       },
       (response) => {
@@ -68,7 +100,7 @@ function runGeneralChatGPT(){
     );
   })
   clearButton.addEventListener("click", () => {
-    chatGPTInput.innerHTML = "";
+    chatGPTInput.value = "";
     output.innerHTML = "";
   })
   chatGPTShowButton.addEventListener("click", () => {
