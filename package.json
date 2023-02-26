@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "chatgpt": "^4.7.2",
+    "dotenv": "^16.0.3",
     "python-shell": "^5.0.0"
   }
 }

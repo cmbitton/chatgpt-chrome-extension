@@ -12,14 +12,27 @@ export {}
 // For more information on Content Scripts,
 // See https://developer.chrome.com/extensions/content_scripts
 
-// Log `title` of current active web page
-const pageTitle = document.head.getElementsByTagName('title')[0].innerHTML;
-console.log(
-  `Page title is: '${pageTitle}' - evaluated by Chrome extension's 'contentScript.js' file`
-);
+function createChatGPTGeneralInterface () {
+  const body = document.querySelector('body')
+  const container = document.createElement('div')
+  container.classList.add("chatgpt-general-container")
+  //logo
+  const gptLogo = document.createElement('img');
+  gptLogo.classList.add('gpt-logo-general-interface')
+  gptLogo.src = "https://openai.com/content/images/2022/05/openai-avatar.png"
+
+  //prompt input
+  const promptInput = document.createElement("input");
+  promptInput.type = "text";
+  promptInput.classList.add("gpt-general-prompt-input")
 
 
-function createChatGPTInterface() {
+  container.append(promptInput, gptLogo)
+  body.insertBefore(container, body.firstChild)
+  //input
+}
+createChatGPTGeneralInterface();
+function createChatGPTGmailInterface() {
   const ChatGPTContainer = document.createElement('div');
   ChatGPTContainer.classList.add('chatgpt-container');
   const email = document.querySelector('div[aria-label="Message Body"]');
@@ -61,7 +74,7 @@ function main() {
           main();
         }
       }, 3000);
-      createChatGPTInterface();
+      createChatGPTGmailInterface();
     }
   }, 3000);
 }
