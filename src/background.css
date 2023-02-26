@@ -1,4 +1,4 @@
-#chatgpt-input{
+#chatgpt-input {
     background-color: rgb(232, 240, 254);
     border-radius: 5px;
     margin: 10px;
@@ -9,18 +9,18 @@
     padding: 5px;
 }
 
-#chatgpt-button{
+#chatgpt-button {
     cursor: pointer;
     width: 50px;
     height: 50px;
-    background-image: url("https://openai.com/content/images/2022/05/openai-avatar.png"); 
+    background-image: url("https://openai.com/content/images/2022/05/openai-avatar.png");
     background-size: cover;
     border-radius: 5px;
     border: none;
     outline: none;
 }
 
-#chatgpt-button:active{
+#chatgpt-button:active {
     transform: scale(0.9);
 }
 
@@ -37,23 +37,27 @@
 .chatgpt-general-container {
     font-family: sans-serif;
     box-sizing: border-box;
-    display: flex;
+    display: grid;
+    grid-template: 1fr 40px 5fr / 7fr 75px;
     gap: 15px;
-    align-items: center;
-    justify-content: center;
+    place-items: center;
     position: fixed;
     z-index: 9999999;
     top: 100px;
     right: 25px;
 }
+
 .gpt-logo-general-interface {
+    cursor: pointer;
+    grid-column: 2;
     border-radius: 5px;
     width: 50px;
     height: 50px;
 }
-.gpt-general-prompt-input{
+
+.gpt-general-prompt-input {
     box-sizing: border-box;
-    width: 350px; 
+    width: 350px;
     height: 35px;
     padding-left: 3px;
     font-size: 1rem;
@@ -62,6 +66,55 @@
     border: 2px solid #aaa;
     background-color: rgb(232, 240, 254);
 }
-.gpt-general-prompt-input:focus{
+
+.gpt-general-prompt-input:focus {
     border-color: rgb(0, 133, 242);
+}
+
+.chatgpt-general-output {
+    width: 350px;
+    height: 100%;
+    background-color: #eeeeee85;
+    border-radius: 5px;
+    padding: 10px;
+    grid-row: 2 / -1;
+}
+
+.chatgpt-general-run-button, .chatgpt-general-clear-button {
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    align-self: baseline;
+    padding: 8px 12px;
+    width: 75px;
+    height: 40px;
+    background-color: #007200;
+    border-radius: 5px;
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.chatgpt-general-clear-button{
+    background-color: #b50000;
+    grid-row: 3;
+    align-self: baseline;
+
+}
+
+.chatgpt-general-run-button:active,
+.chatgpt-general-clear-button:active,
+.gpt-logo-general-interface:active {
+    transform: scale(0.9);
+}
+
+.chatgpt-general-run-button:hover,
+.chatgpt-general-clear-button:hover,
+.gpt-logo-general-interface:hover{
+    filter: brightness(125%);
+}
+
+.hidden{
+    display: none;
 }

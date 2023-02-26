@@ -7,7 +7,7 @@ import './background.css'
 // See https://developer.chrome.com/extensions/background_pages
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'GREETINGS') {
+  if (request.type === 'CHATGPT') {
 
       const api = new ChatGPTUnofficialProxyAPI({
         accessToken: CHATGPT_ACCESS_TOKEN

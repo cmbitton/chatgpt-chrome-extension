@@ -24,14 +24,62 @@ function createChatGPTGeneralInterface () {
   //prompt input
   const promptInput = document.createElement("input");
   promptInput.type = "text";
-  promptInput.classList.add("gpt-general-prompt-input")
+  promptInput.classList.add("gpt-general-prompt-input", "hidden")
 
+  //output
+  const output = document.createElement("output");
+  output.classList.add("chatgpt-general-output", "hidden");
 
-  container.append(promptInput, gptLogo)
+  //run button
+  const runButton = document.createElement("button");
+  runButton.classList.add("chatgpt-general-run-button", "hidden");
+  runButton.textContent = "RUN";
+
+  //clear button
+  const clearButton = document.createElement("button");
+  clearButton.classList.add("chatgpt-general-clear-button", "hidden");
+  clearButton.textContent = "CLEAR";
+
+  container.append(promptInput, gptLogo, output, runButton, clearButton)
   body.insertBefore(container, body.firstChild)
   //input
 }
+function runGeneralChatGPT(){
+  const runButton = document.querySelector(".chatgpt-general-run-button");
+  const chatGPTShowButton = document.querySelector(".gpt-logo-general-interface");
+  const clearButton = document.querySelector(".chatgpt-general-clear-button")
+  const chatGPTInput = document.querySelector(".gpt-general-prompt-input");
+  const output = document.querySelector(".chatgpt-general-output");
+  runButton.addEventListener("click", () => {
+    const highlightedText = window.getSelection().toString();
+    chrome.runtime.sendMessage(
+      {
+        type: 'CHATGPT',
+        payload: {
+          prompt: chatGPTInput.value, 
+          message: highlightedText
+        },
+      },
+      (response) => {
+        const formattedText = response.res.text.replace(/\n/g, '<br>')
+        output.innerHTML = (formattedText);
+        console.log(response.res)
+      }
+    );
+  })
+  clearButton.addEventListener("click", () => {
+    chatGPTInput.innerHTML = "";
+    output.innerHTML = "";
+  })
+  chatGPTShowButton.addEventListener("click", () => {
+    clearButton.classList.toggle("hidden");
+    runButton.classList.toggle("hidden");
+    chatGPTInput.classList.toggle("hidden");
+    output.classList.toggle("hidden");
+  })
+}
 createChatGPTGeneralInterface();
+runGeneralChatGPT();
 function createChatGPTGmailInterface() {
   const ChatGPTContainer = document.createElement('div');
   ChatGPTContainer.classList.add('chatgpt-container');
@@ -47,7 +95,7 @@ function createChatGPTGmailInterface() {
     console.log(chatGPTInput.value)
     chrome.runtime.sendMessage(
       {
-        type: 'GREETINGS',
+        type: 'CHATGPT',
         payload: {
           prompt: chatGPTInput.value, 
           message: email.textContent
