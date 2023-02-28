@@ -19,7 +19,7 @@ function createChatGPTGeneralInterface () {
   //logo
   const gptLogo = document.createElement('img');
   gptLogo.classList.add('gpt-logo-general-interface')
-  gptLogo.src = "https://openai.com/content/images/2022/05/openai-avatar.png"
+  gptLogo.src = "https://i.ibb.co/Pg4BMCg/openai-avatar.png"
 
   //prompt input
   const promptInput = document.createElement("input");

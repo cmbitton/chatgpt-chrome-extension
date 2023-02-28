@@ -38,7 +38,7 @@
     font-family: sans-serif;
     box-sizing: border-box;
     display: grid;
-    grid-template: 1fr 40px 5fr / 7fr 75px;
+    grid-template: 60px 40px 5fr / 7fr 75px;
     gap: 15px;
     place-items: center;
     position: fixed;
@@ -75,7 +75,7 @@
     overflow: auto;
     width: 350px;
     height: 350px;
-    background-color: #eeeeee85;
+    background-color: #eeeeeea6;
     border-radius: 5px;
     padding: 10px;
     grid-row: 2 / -1;

@@ -1,4 +1,4 @@
-# <img src="https://openai.com/content/images/2022/05/openai-avatar.png" width="45" padding="50px" align="left">ChatGPT Chrome Extension
+# <img src="https://i.ibb.co/Pg4BMCg/openai-avatar.png" width="45" padding="50px" align="left">ChatGPT Chrome Extension
 
 A Chrome browser extension powered by ChatGPT. Currently in production.
 
